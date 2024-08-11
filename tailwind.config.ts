@@ -11,8 +11,7 @@ const config: Config = {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
-          "conic-gradient( at 50% 100%, var(--tw-gradient-stops))",
-       
+          "conic-gradient( at 50% 100%, var(--tw-gradient-stops))",       
       },
     },
   },

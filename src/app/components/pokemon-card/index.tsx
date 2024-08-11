@@ -13,10 +13,10 @@ export function PokemonCard({ pokemon }: any) {
   const setColor: string = typeColors[indexColor];
 
   return (
-    <div className="relative group ">
+    <div className="relative group  transition-all duration-300 ">
       <div
         className={`absolute -inset-1 group-hover:bg-gradient-to-b from-red-600 from-50% to-50% to-white blur
-         rounded-lg  group-hover:opacity-100 transition duration-1000 group-hover:duration-200`}
+         rounded-lg  group-hover:opacity-100 transition-all duration-500 !important`}
       ></div>
 
       <Link
@@ -41,7 +41,7 @@ export function PokemonCard({ pokemon }: any) {
               (item: { type: { name: string } }, i: number) => (
                 <li
                   key={i}
-                  className={` py-2 rounded-lg w-20 font-bold text-center
+                  className={` py-2 rounded-lg w-20 font-bold text-center 
             ${typeColors[item.type.name]}`}
                 >
                   {item.type.name}

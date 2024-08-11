@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <>
       <header>
-        <nav className="flex justify-between bg-[#0e0e0e] items-center">
+        <nav className="flex justify-between bg-[#0e0e0e] items-center p-4 pt-0">
           <Link href={"/"}>
             <Image
               src={"/pokeball.png"}
@@ -36,7 +36,6 @@ export default function Header() {
             />
           </Link>
         </nav>
-        <Search />
       </header>
     </>
   );

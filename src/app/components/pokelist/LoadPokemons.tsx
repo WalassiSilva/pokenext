@@ -2,6 +2,7 @@
 import { getPokemons } from "@/app/services/getPokemons";
 import React, { useEffect, useState } from "react";
 import { PokemonCard } from "../pokemon-card";
+import { usePokemonFilter } from "@/hooks/usePokemonFilter";
 
 export type PokemonType = {
   id: string;
@@ -12,7 +13,8 @@ export type PokemonType = {
 
 export default function LoadPokemons({ limit }: { limit: number }) {
   const [limitValue, setLimitValue] = useState(20);
-  const [pokemons, setPokemons] = useState<PokemonType[] | undefined>([]);
+  // const [pokemons, setPokemons] = useState<PokemonType[] | undefined>([]);
+  const {pokemons, setPokemons} =  usePokemonFilter();
 
   function handleClick(limit: number) {
     setLimitValue(limit + 10);
@@ -35,7 +37,7 @@ export default function LoadPokemons({ limit }: { limit: number }) {
         +
       </button>
       <div className=" flex flex-wrap gap-5 p-5 justify-center">
-        {pokemons!.map((poke, i) => (
+        { pokemons &&  pokemons.map((poke, i) => (
           <PokemonCard key={i} pokemon={poke}></PokemonCard>
         ))}
       </div>
