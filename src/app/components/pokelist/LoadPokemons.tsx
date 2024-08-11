@@ -37,7 +37,7 @@ export default function LoadPokemons({ limit }: { limit: number }) {
         +
       </button>
       <div className=" flex flex-wrap gap-5 p-5 justify-center">
-        { pokemons &&  pokemons.map((poke, i) => (
+        { pokemons &&  pokemons.map((poke: PokemonType, i: number) => (
           <PokemonCard key={i} pokemon={poke}></PokemonCard>
         ))}
       </div>

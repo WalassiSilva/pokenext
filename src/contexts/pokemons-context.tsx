@@ -11,8 +11,8 @@ interface PokemonsContextProviderProps {
 export const PokemonsContext = createContext({
   search: "",
   type: "",
-  pokemons: [],
-  setPokemons:(value: string) => [],
+  pokemons: {} as any,
+  setPokemons: (value: any) => {} ,
   setSearch: (value: string) => {},
   setType: (value: string) => {},
 });
@@ -22,7 +22,7 @@ export function PokemonsContextProvider({
 }: PokemonsContextProviderProps) {
   const [search, setSearch] = useState("");
   const [type, setType] = useState("");
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemons, setPokemons] = useState<PokemonType[] >();
 
   return (
     <PokemonsContext.Provider
