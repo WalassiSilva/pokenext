@@ -3,7 +3,7 @@ import { getPokemon } from "@/app/services/getPokemon";
 import React, { useEffect, useState } from "react";
 import { PokemonCard, typeColors } from "../pokemon-card";
 import { PokemonType } from "../pokelist/LoadPokemons";
-import TypeSelect from "./TypeSelect";
+// import TypeSelect from "./TypeSelect";
 import { usePokemonFilter } from "@/hooks/usePokemonFilter";
 import { getPokemons } from "@/app/services/getPokemons";
 
