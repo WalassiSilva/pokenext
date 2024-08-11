@@ -16,13 +16,15 @@ export default function Search() {
   useEffect(() => {
     const getPokemonData = async () => {
       const pokemonData = await getPokemons(20);
-      const results = await Promise.all(
-        pokemonData.map(async (pokemon) => {
-          return await getPokemon(pokemon.name);
-        })
-      );
-      setPokemons([...results]);
-    };
+      if(pokemonData) {
+        const results = await Promise.all(
+          pokemonData.map(async (pokemon) => {
+            return await getPokemon(pokemon.name);
+          })
+        );
+        setPokemons([...results]);
+      };
+      }
     getPokemonData();
   }, []);
 
