@@ -43,27 +43,30 @@ export default function Search() {
   function filterHandle(e: React.ChangeEvent<HTMLSelectElement>) {
     const value = e.target.value;
     setType(value);
+  }
 
-    if (value) {
-      const fetchData = async () => {
-        const data = await getPokemons(limit);
-        if(value === "none"){
-          setPokemons(data);
-          return;
-        }
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getPokemons(limit);   
+
+      if(type === "none"){
+        setPokemons(data);
+        return;
+      }
+      
+      if(data) {
         const filtered = data?.filter((pokemon) => {
           return (
             pokemon.types[0].type.name.includes(type) ||
             pokemon.types[1]?.type.name.includes(type)
           );
-        });
-
+        });       
         setPokemons(filtered);
-      };
+      }
+    };
+    fetchData();
 
-      fetchData();
-    }
-  }
+  }, [type]);
 
   function clearHandle() {
     setPokemon(null);
