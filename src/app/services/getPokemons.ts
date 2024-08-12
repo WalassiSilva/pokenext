@@ -1,6 +1,6 @@
 export async function getPokemons(limit: number) {
   try {
-    const urls = await getPokemonsUrl(limit, 0);
+    const urls = await getPokemonsUrl(limit=150, 0);
     const requests = urls.map(async (url: string) => {
       const response = await fetch(url);
       return response.json();

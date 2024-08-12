@@ -1,9 +1,8 @@
 "use client";
 import { getPokemon } from "@/app/services/getPokemon";
 import React, { useEffect, useState } from "react";
-import { PokemonCard, typeColors } from "../pokemon-card";
+import { PokemonCard} from "../pokemon-card";
 import { PokemonType } from "../pokelist/LoadPokemons";
-// import TypeSelect from "./TypeSelect";
 import { usePokemonFilter } from "@/hooks/usePokemonFilter";
 import { getPokemons } from "@/app/services/getPokemons";
 
@@ -11,11 +10,12 @@ export default function Search() {
   const [value, setValue] = useState("");
   const [pokemon, setPokemon] = useState<PokemonType | null>();
 
-  const { type, setType, pokemons, setPokemons } = usePokemonFilter();
+  const { type, setType, pokemons,limit, setPokemons } = usePokemonFilter();
+  
 
   useEffect(() => {
     const getPokemonData = async () => {
-      const pokemonData = await getPokemons(20);
+      const pokemonData = await getPokemons(limit);
       if(pokemonData) {
         const results = await Promise.all(
           pokemonData.map(async (pokemon) => {
@@ -42,17 +42,15 @@ export default function Search() {
   }
   function filterHandle(e: React.ChangeEvent<HTMLSelectElement>) {
     const value = e.target.value;
-
-    if (value === "none") {
-      console.log(type);
-      return;
-    }
     setType(value);
 
     if (value) {
       const fetchData = async () => {
-        const data = await getPokemons(20);
-
+        const data = await getPokemons(limit);
+        if(value === "none"){
+          setPokemons(data);
+          return;
+        }
         const filtered = data?.filter((pokemon) => {
           return (
             pokemon.types[0].type.name.includes(type) ||

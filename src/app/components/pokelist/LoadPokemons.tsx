@@ -11,28 +11,28 @@ export type PokemonType = {
   types: string[];
 };
 
-export default function LoadPokemons({ limit }: { limit: number }) {
-  const [limitValue, setLimitValue] = useState(20);
+export default function LoadPokemons() {
+  // const [limitValue, setLimitValue] = useState(20);
   // const [pokemons, setPokemons] = useState<PokemonType[] | undefined>([]);
-  const {pokemons, setPokemons} =  usePokemonFilter();
+  const {pokemons, setPokemons, setLimit, limit} =  usePokemonFilter();
 
   function handleClick(limit: number) {
-    setLimitValue(limit + 10);
-    return limitValue;
+    setLimit(limit + 10);
+    return limit;
   }
 
   useEffect(() => {
     async function fetchPokemon() {
-      const data = await getPokemons(limitValue);
+      const data = await getPokemons(limit);
       setPokemons(data);
     }
     fetchPokemon();
-  }, [limit, limitValue]);
+  }, [limit]);
   return (
     <div className="my-4 mx-auto relative">
       <button
         className=" z-10 fixed bg-blue-400 p-2 size-10 right-1/2 translate-x-1/2 bottom-4 font-black rounded-full hover:bg-blue-600 "
-        onClick={() => handleClick(limitValue)}
+        onClick={() => handleClick(limit)}
       >
         +
       </button>
