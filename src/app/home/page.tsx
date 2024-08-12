@@ -1,14 +1,20 @@
-
+import { Suspense } from "react";
 import Search from "../components/header/Search";
 import LoadPokemons from "../components/pokelist/LoadPokemons";
 
 export default function Page() {
-  const limit = 5;
   return (
     <div>
-      
       <Search />
-      <LoadPokemons limit={limit} />
+      <Suspense
+        fallback={
+          <div className="text-center text-white w-full h-screen">
+            Loading...
+          </div>
+        }
+      >
+        <LoadPokemons />
+      </Suspense>
     </div>
   );
 }
