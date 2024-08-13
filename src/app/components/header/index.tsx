@@ -1,21 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import Search from "./Search";
+import NavItem from "./NavItem";
 
 export default function Header() {
   return (
     <>
       <header>
         <nav className="flex justify-between bg-[#0e0e0e] items-center p-4 pt-0">
-          <Link href={"/"}>
-            <Image
-              src={"/pokeball.png"}
-              alt="Pokeball"
-              width={48}
-              height={48}
-              className="w-auto"
-            />
-          </Link>
+          <NavItem />
           <div>
             <Image
               priority

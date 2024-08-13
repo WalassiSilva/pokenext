@@ -13,12 +13,13 @@ export type PokemonType = {
 };
 
 export default function LoadPokemons() {
-  // const [limitValue, setLimitValue] = useState(20);
-  // const [pokemons, setPokemons] = useState<PokemonType[] | undefined>([]);
-  const { pokemons, setPokemons, setLimit, limit } = usePokemonFilter();
+  const { pokemons, setPokemons, setLimit, limit, search } = usePokemonFilter();
 
   const [limitControl, setLimitControl] = useState(10);
   const filteredPokemons = pokemons?.slice(0, limitControl);
+  const searchedPokemons = pokemons?.filter((pokemon: PokemonType) =>
+    pokemon.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   function handleClick() {
     setLimitControl((prev) => prev + 10);
@@ -40,9 +41,13 @@ export default function LoadPokemons() {
         +
       </button>
       <div className=" flex flex-wrap gap-5 p-5 justify-center">
-        {filteredPokemons ? (
+        {filteredPokemons && search.length === 0 ? (
           filteredPokemons.map((poke: PokemonType, i: number) => (
             <PokemonCard key={i} pokemon={poke}></PokemonCard>
+          ))
+        ) : searchedPokemons && search.length !== 0 ? (
+          searchedPokemons.map((poke: PokemonType, index: number) => (
+            <PokemonCard key={index} pokemon={poke}></PokemonCard>
           ))
         ) : (
           <div className="flex flex-col justify-center items-center gap-40">
