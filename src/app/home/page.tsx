@@ -5,7 +5,6 @@ import LoadPokemons from "../components/pokelist/LoadPokemons";
 export default function Page() {
   return (
     <div>
-      <Search />
       <Suspense
         fallback={
           <div className="text-center text-white w-full h-screen">

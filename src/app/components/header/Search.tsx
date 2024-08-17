@@ -1,16 +1,15 @@
 "use client";
 import { getPokemon } from "@/app/services/getPokemon";
 import React, { useEffect, useState } from "react";
-import { PokemonCard } from "../pokemon-card";
 import { PokemonType } from "../pokelist/LoadPokemons";
 import { usePokemonFilter } from "@/hooks/usePokemonFilter";
 import { getPokemons } from "@/app/services/getPokemons";
 
 export default function Search() {
-  // const [value, setValue] = useState("");
   const [pokemon, setPokemon] = useState<PokemonType | null>();
-
+  const [defaultPokemons, setDefaultPokemons] = useState<PokemonType[]>([]);
   const { type, setType, pokemons, limit, setPokemons, search, setSearch } = usePokemonFilter();
+  
 
   useEffect(() => {
     const getPokemonData = async () => {
@@ -22,6 +21,7 @@ export default function Search() {
           })
         );
         setPokemons([...results]);
+        setDefaultPokemons([...results]);
       }
     };
     getPokemonData();
@@ -49,23 +49,17 @@ export default function Search() {
     fetchData();
   }, [type]);
 
-  // useEffect(() => {
-  //   if (value === "") {
-  //     setPokemons(pokemons);
-  //     return;
-  //   }
-  //   setPokemons(() =>
-  //     pokemons.filter((pokemon:PokemonType) => pokemon.name.includes(value.toLowerCase()))
-  //   );
-  // }, [value]);
 
   function submitHandle(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (search) {
+      
       const fetchData = async () => {
         const data = await getPokemon(search);
+        
         setSearch("");
         setPokemon(data);
+        setPokemons([data]);
       };
       fetchData();
     }
@@ -74,13 +68,10 @@ export default function Search() {
     const value = e.target.value;
     setType(value);
   }
-  const searchedPokemons = pokemons?.filter((pokemon: PokemonType) => {
-    return pokemon.name.toLowerCase().includes(search.toLowerCase());
-  });
 
   function clearHandle() {
     setPokemon(null);
-    // setPokemons(pokemons);
+    setPokemons(defaultPokemons);    
   }
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -90,14 +81,14 @@ export default function Search() {
   return (
     <>
       <form onSubmit={submitHandle}>
-        <div className="flex flex-col justify-center items-center gap-4 px-2 py-4 gradient-custom">
-          <div className="flex items-center">
+        <div className="flex justify-center items-center gap-3 sm:gap-4 px-2 py-4 gradient-custom">
+          <div className="flex items-center text-white">
             <input
               value={search}
               onChange={handleInputChange}
               type="text"
-              placeholder="Insert Pokemon number or Id "
-              className="bg-zinc-800 rounded-lg p-2 placeholder:text-xs outline-none"
+              placeholder="Search... "
+              className="bg-red-500 w-24 md:w-auto rounded-lg p-2 placeholder:text-white placeholder:text-xs outline-none"
             />
             <button
               onClick={clearHandle}
@@ -108,10 +99,10 @@ export default function Search() {
           </div>
 
           <select
-            className="bg-zinc-800 rounded-lg p-2 placeholder:text-xs *:capitalize"
+            className="bg-red-500 text-white rounded-lg p-2 placeholder:text-xs *:capitalize cursor-pointer *:text-center"
             onChange={filterHandle}
           >
-            <option value="none">Select a type</option>
+            <option value="none">Types</option>
             <option className="bg-[#729f3f]" value="bug">
               Bug
             </option>
@@ -168,15 +159,9 @@ export default function Search() {
             </option>
           </select>
 
-          {/* <TypeSelect filterHandle={filterHandle}/> */}
         </div>
       </form>
 
-      {pokemon && (
-        <div className="p-5 flex justify-center">
-          <PokemonCard pokemon={pokemon} />
-        </div>
-      )}
     </>
   );
 }

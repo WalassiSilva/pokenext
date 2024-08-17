@@ -9,17 +9,18 @@ type PokemonCardProps = {
 };
 
 export function PokemonCard({ pokemon }: any) {
-  const indexColor: string = pokemon.types[0].type.name;
+  const indexColor: string = pokemon?.types[0].type.name;
   const setColor: string = typeColors[indexColor];
 
   return (
-    <div className="relative group  transition-all duration-300 ">
+    <div className="relative group transition-all duration-300 ">
       <div
         className={`absolute -inset-1 group-hover:bg-gradient-to-b from-red-600 from-50% to-50% to-white blur
-         rounded-lg  group-hover:opacity-100 transition-all duration-500 !important`}
+         rounded-lg group-hover:opacity-100 transition-all duration-500 !important`}
       ></div>
 
-      <Link
+      {pokemon ? (
+        <Link
         href={`/pokemon-details/${pokemon.id}`}
         className="relative w-52 h-72 rounded-lg border-2 flex flex-col overflow-hidden outline-none border-none group-hover"
       >
@@ -29,11 +30,11 @@ export function PokemonCard({ pokemon }: any) {
           width={200}
           height={200}
           alt="pokemon sprite"
-          className={`w-auto max-w-full flex flex-1 mx-auto ${setColor} `}
+          className={`w-auto max-w-full flex flex-1 mx-auto ${setColor} bg-opacity-80 `}
         />
-        <div className="bg-slate-700 px-2 ">
+        <div className=" dark:text-white bg-slate-700/30 px-2 ">
           <div className="flex justify-between font-semibold">
-            <p>{pokemon.name.toUpperCase()}</p>
+            <p>{pokemon?.name.toUpperCase()}</p>
             <p># {pokemon.id}</p>
           </div>
           <ul className=" flex justify-center gap-4 py-2 ">
@@ -51,6 +52,9 @@ export function PokemonCard({ pokemon }: any) {
           </ul>
         </div>
       </Link>
+      ) : (
+        <h2 className="text-2xl text-white text-bold bg-black p-2 rounded-lg">Pokemon not found!</h2>
+      )}
     </div>
   );
 }

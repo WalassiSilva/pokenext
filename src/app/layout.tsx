@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./components/header";
 import { PokemonsContextProvider } from "@/contexts/pokemons-context";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,11 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className}`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} bg-light-mobile dark:bg-dark-mobile lg:bg-light-mode lg:dark:bg-dark-mode bg-no-repeat bg-fixed bg-cover`}>
         <PokemonsContextProvider>
-          <Header />
-          {children}
+          <Providers>
+            <Header />
+            {children}
+          </Providers>
         </PokemonsContextProvider>
       </body>
     </html>

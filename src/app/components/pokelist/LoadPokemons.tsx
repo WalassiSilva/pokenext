@@ -13,12 +13,12 @@ export type PokemonType = {
 };
 
 export default function LoadPokemons() {
-  const { pokemons, setPokemons, setLimit, limit, search } = usePokemonFilter();
+  const { pokemons, setPokemons, limit, search } = usePokemonFilter();
 
   const [limitControl, setLimitControl] = useState(10);
   const filteredPokemons = pokemons?.slice(0, limitControl);
   const searchedPokemons = pokemons?.filter((pokemon: PokemonType) =>
-    pokemon.name.toLowerCase().includes(search.toLowerCase())
+    pokemon?.name.toLowerCase().includes(search.toLowerCase())
   );
 
   function handleClick() {
@@ -33,12 +33,12 @@ export default function LoadPokemons() {
     fetchPokemon();
   }, [limit]);
   return (
-    <div className="my-4 mx-auto relative">
+    <div className="my-4 mx-auto relative mt-24">
       <button
-        className=" z-10 fixed bg-blue-400 p-2 size-10 right-1/2 translate-x-1/2 bottom-4 font-black rounded-full hover:bg-blue-600 "
+        className=" z-10 fixed bg-blue-400  size-10 right-1/2 translate-x-1/2 bottom-4 font-black rounded-full shadow-lg hover:shadow-white hover:bg-blue-600 "
         onClick={() => handleClick()}
       >
-        +
+        <Image src={"/pokeball.png"} alt="pokeball" width={48} height={48} className="hover:animate-spin"/>
       </button>
       <div className=" flex flex-wrap gap-5 p-5 justify-center">
         {filteredPokemons && search.length === 0 ? (
