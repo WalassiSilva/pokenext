@@ -35,10 +35,10 @@ export default function LoadPokemons() {
   return (
     <div className="my-4 mx-auto relative mt-24">
       <button
-        className=" z-10 fixed bg-blue-400  size-10 right-1/2 translate-x-1/2 bottom-4 font-black rounded-full shadow-lg hover:shadow-white hover:bg-blue-600 "
+        className=" z-10 fixed bg-blue-400  size-16 right-1/2 translate-x-1/2 bottom-4 font-black rounded-full shadow-lg hover:shadow-white hover:bg-blue-600 "
         onClick={() => handleClick()}
       >
-        <Image src={"/pokeball.png"} alt="pokeball" width={48} height={48} className="hover:animate-spin"/>
+        <Image src={"/pokeball.png"} alt="pokeball" width={64} height={64} className="hover:animate-spin"/>
       </button>
       <div className=" flex flex-wrap gap-5 p-5 justify-center">
         {filteredPokemons && search.length === 0 ? (
