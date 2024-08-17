@@ -45,7 +45,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           kg
         </div>
       </div>
-      <div className="bg-white/40 dark:bg-black/40 shadow-lg py-8 h-96 mx-4 md:mx-[20%] lg:mx-[30%] rounded-lg">
+      <div className="bg-white/40 dark:bg-black/40 shadow-lg py-8 min-h-96 mx-4 md:mx-[20%] lg:mx-[30%] rounded-lg">
         <div className="flex gap-4 flex-col *:rounded-md px-10">
           <h3 className="font-bold text-xl">Abilities</h3>
           {abilityDetails}
